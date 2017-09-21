@@ -18,7 +18,18 @@ Available environments are:
 
 The live version of the Vagrant boxes can be found on Vagrant:
 
-- @TODO LINK TO BOXES
+- **apolloblack/ruby**
+- **apolloblack/go**
+- **apolloblack/java**
+
+To use any of these, simply add them to your `Vagrantfile` like this:
+
+```
+Vagrant.configure("2") do |config|
+  config.vm.box = "apolloblack/ruby"
+  config.vm.box_version = "0.0.5"
+end
+```
 
 ### Process Explained
 
@@ -33,11 +44,12 @@ Creating the virtual machines is a 3-step process.
 1. Open virtual box
 2. Create a new linux instance
 3. Before launching, change the settings listed below
-4. Launch instance and follow through the Linux installation process
+4. Launch instance and follow through the Linux installation process, using the same value for the server hostname as the name of the virtual machine instance.
 5. When asked for user details, use `vagrant` for both username and password
-6. Once done, log into your instance via the virtual box terminal window with the new username and password `vagrant:vagrant`
+6. Do not encrypt the home directory
+7. Once done, log into your instance via the virtual box terminal window with the new username and password `vagrant:vagrant`
 
-VBox Settings:
+VBox Setting Changes:
 
 - Turn off Audio (Uncheck Audio > Enable Audio)
 - Turn off USB (Uncheck Ports > USB > Enable USB Controller)
@@ -45,7 +57,7 @@ VBox Settings:
 
 ## Provision the base VM and install required components & dependencies
 
-It's important to ensure that you download and add the default Vagrant insecure SSH key before packaging the box otherwise authentication won't work correctly.
+It's important to ensure that you download and add the default Vagrant insecure SSH key before packaging the box otherwise authentication won't work correctly when you create boxes from it.
 
 Ensure that the vagrant user can use `sudo` without a password:
 
@@ -98,6 +110,7 @@ Once the above process has completed, it's time to cleanup and package the box.
 First, while still logged in, let's clean the box up:
 
 ```
+rm ~/setup.sh
 sudo dd if=/dev/zero of=/EMPTY bs=1M
 sudo rm -f /EMPTY
 cat /dev/null > ~/.bash_history && history -c && exit
@@ -108,4 +121,4 @@ Head back to your host machine terminal and run the following:
 
 `vagrant package --base <box name>`
 
-Replace <box name> with the name of the Virtual Box instance (ie: apollo-ruby). Once done, the box will be packaged in the same directory that you are currently in.
+Replace `<box name>` with the name of the Virtual Box instance (ie: `apollo-ruby`). Once done, the box will be packaged in the same directory that you are currently in.
