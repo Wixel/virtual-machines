@@ -1,9 +1,8 @@
 PASSWD="$(date +%s | sha256sum | base64 | head -c 32 ; echo)"
 
 echo "# -------------------------------- #"
-echo "#       Apollo GO VM Install       #"
+echo "#      Apollo Java VM Install      #"
 echo "# -------------------------------- #"
-echo "# + Golang 1.9                     #"
 echo "# + PostgreSQL 9.6                 #"
 echo "# + PostGIS 2.3                    #"
 echo "# + Redis Latest                   #"
@@ -15,19 +14,6 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get -y install gcc make python-software-properties git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip  libmagick++-dev libv8-dev libffi-dev libpulse0
 mkdir ~/downloads
-
-echo "# -------------------------------- #"
-echo "#        Installing Golang         #"
-echo "# -------------------------------- #"
-
-cd ~/downloads && curl -O https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
-cd ~/downloads && tar xvf go1.9.linux-amd64.tar.gz
-sudo chown -R root:root ./go
-sudo mv go /usr/local
-echo 'export GOPATH=$HOME/work' | sudo tee --append ~/.profile > /dev/null
-echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' | sudo tee --append ~/.profile > /dev/null
-source ~/.profile
-mkdir $HOME/work
 
 echo "# -------------------------------- #"
 echo "#         Installing Redis         #"
@@ -91,7 +77,6 @@ echo "# -------------------------------- #"
 echo "#          Setting ENV Vars        #"
 echo "# -------------------------------- #"
 
-echo 'RAILS_ENV="production"' | sudo tee --append /etc/environment > /dev/null
 echo 'DATABASE_URL="postgresql://app_user:password@127.0.0.1:5432/app_db"' | sudo tee --append /etc/environment > /dev/null
 echo 'REDIS_URL="redis://localhost:637"' | sudo tee --append /etc/environment > /dev/null
 

@@ -14,14 +14,14 @@ echo "# -------------------------------- #"
 
 sudo apt-get update -y
 sudo apt-get upgrade -y
+sudo apt-get -y install gcc make python-software-properties git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip  libmagick++-dev libv8-dev libffi-dev libpulse0
+mkdir ~/downloads
 
 echo "# -------------------------------- #"
 echo "#          Installing Ruby         #"
 echo "# -------------------------------- #"
 
-sudo apt-get -y install gcc make python-software-properties git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip  libmagick++-dev libv8-dev libffi-dev libpulse0
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
-mkdir ~/downloads
 cd ~/downloads && wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz -O ruby.tar.gz
 cd ~/downloads && tar xzf ruby.tar.gz
 cd ~/downloads/ruby-2.4.1 && ./configure -prefix=$HOME

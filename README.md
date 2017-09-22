@@ -19,9 +19,9 @@ This project contains all the configuration and set up instructions to compile o
 
 We use specific environments for the kinds of development work we do, these include:
 
-* `apollo-ruby` for Ruby on Rails specific development
-* `apollo-go` for Golang specific development
-* `apollo-java` for Java specific development
+* [apollo-ruby](https://github.com/apollo-black/virtual-machines/blob/master/virtualbox/apollo-ruby.sh) for Ruby on Rails specific development
+* [apollo-go](https://github.com/apollo-black/virtual-machines/blob/master/virtualbox/apollo-go.sh) for Golang specific development
+* [apollo-java](https://github.com/apollo-black/virtual-machines/blob/master/virtualbox/apollo-java.sh) for Java specific development
 
 ### Vagrant Boxes
 
