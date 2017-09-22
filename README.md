@@ -2,36 +2,44 @@
 
 This project contains all the configuration and set up instructions to compile our VirtualBox/Vagrant virtual machine environments for development.
 
-Available environments are:
+## Table of contents
 
-- `apollo-ruby` for Ruby on Rails specific development
-- `apollo-go` for Golang specific development
-- `apollo-java` for Java specific development
+- [Environment](#environments)
+  - [Dependencies](#dependencies)
+  - [Vagrant Boxes](#vagrant-boxes)
+- [Building Base Boxes](#building-base-boxes)
+    - [Creating Ubuntu Image](#creating-ubuntu-image)
+    - [Provisioning Base Box](#provisioning-base-box)
+    - [Packaging](#packaging)
+- [License](#license)
+- [Links](#links)
 
-### Prerequisites:
+## Environment
 
-- [Vagrant 2.0.0](https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.dmg?_ga=2.175497765.666050554.1506000715-1387584540.1505460054)
-- [VirtualBox ^5.1.2.8](http://download.virtualbox.org/virtualbox/5.1.28/VirtualBox-5.1.28-117968-OSX.dmg)
-- [Ubuntu-16.04.3](http://releases.ubuntu.com/16.04/ubuntu-16.04.3-server-amd64.iso.torrent?_ga=2.185470314.2120170685.1506000760-822906382.1505464433)
+We use specific environments for the kinds of development work we do, these include:
+
+* `apollo-ruby` for Ruby on Rails specific development
+* `apollo-go` for Golang specific development
+* `apollo-java` for Java specific development
 
 ### Vagrant Boxes
 
 The live version of the Vagrant boxes can be found on Vagrant:
 
-- **apolloblack/ruby**
-- **apolloblack/go**
-- **apolloblack/java**
+* **apolloblack/ruby**
+* **apolloblack/go**
+* **apolloblack/java**
 
 To use any of these, simply add them to your `Vagrantfile` like this:
 
-```
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "apolloblack/ruby"
   config.vm.box_version = "0.0.5"
 end
 ```
 
-### Process Explained
+## Building Base Boxes
 
 Creating the virtual machines is a 3-step process.
 
@@ -39,7 +47,7 @@ Creating the virtual machines is a 3-step process.
 2. Provision the base VM and install all required components and dependencies
 3. Packaging the instance as a reusable vagrant box
 
-## Creating a base VM from an Ubuntu Image
+### Creating Ubuntu Image
 
 1. Open virtual box
 2. Create a new linux instance
@@ -55,7 +63,7 @@ VBox Setting Changes:
 - Turn off USB (Uncheck Ports > USB > Enable USB Controller)
 - Ensure that network adapter enabled and attached to NAT
 
-## Provision the base VM and install required components & dependencies
+### Provisioning Base Box
 
 It's important to ensure that you download and add the default Vagrant insecure SSH key before packaging the box otherwise authentication won't work correctly when you create boxes from it.
 
@@ -67,11 +75,15 @@ sudo nano /etc/sudoers.d/vagrant
 
 Add the following to the file:
 
-`vagrant ALL=(ALL) NOPASSWD:ALL`
+```
+vagrant ALL=(ALL) NOPASSWD:ALL
+```
 
 Change the root password to `vagrant`:
 
-`sudo passwd root`
+```
+sudo passwd root
+```
 
 Download vagrant key:
 
@@ -86,6 +98,7 @@ chown -R vagrant /home/vagrant/.ssh
 Enable the local SSH Server:
 
 ```
+sudo apt-get install -y openssh-server
 sudo nano /etc/ssh/sshd_config
 # Uncomment AuthorizedKeysFile %h/.ssh/authorized_keys
 sudo service ssh restart
@@ -103,7 +116,7 @@ chmod a+x setup.sh
 
 It's important to monitor the output from the set up scripts because it might require manual input or report errors.
 
-## Packaging the instance as a reusable vagrant box
+### Packaging
 
 Once the above process has completed, it's time to cleanup and package the box.
 
@@ -119,6 +132,38 @@ sudo shutdown -h now
 
 Head back to your host machine terminal and run the following:
 
-`vagrant package --base <box name>`
+```
+vagrant package --base <box name> --output apollo-<BOX NAME>.box
+```
 
 Replace `<box name>` with the name of the Virtual Box instance (ie: `apollo-ruby`). Once done, the box will be packaged in the same directory that you are currently in.
+
+## Links
+
+- [Vagrant 2.0.0](https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.dmg?_ga=2.175497765.666050554.1506000715-1387584540.1505460054)
+- [VirtualBox ^5.1.2.8](http://download.virtualbox.org/virtualbox/5.1.28/VirtualBox-5.1.28-117968-OSX.dmg)
+- [Ubuntu-16.04.3](http://releases.ubuntu.com/16.04/ubuntu-16.04.3-server-amd64.iso.torrent?_ga=2.185470314.2120170685.1506000760-822906382.1505464433)
+
+## License
+
+MIT License
+
+Copyright (c) 2017 Apollo Black
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
