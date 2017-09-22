@@ -40,6 +40,20 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "apolloblack/go"
+  config.vm.box_version = "0.0.5"
+end
+```
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "apolloblack/java"
+  config.vm.box_version = "0.0.5"
+end
+```
+
 ## Building Base Boxes
 
 Creating the virtual machines is a 3-step process.
