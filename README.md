@@ -11,6 +11,7 @@ This project contains all the configuration and set up instructions to compile o
     - [Creating Ubuntu Image](#creating-ubuntu-image)
     - [Provisioning Base Box](#provisioning-base-box)
     - [Packaging](#packaging)
+- [Components](#components)    
 - [License](#license)
 - [Links](#links)
 
@@ -137,6 +138,40 @@ vagrant package --base <box name> --output apollo-<BOX NAME>.box
 ```
 
 Replace `<box name>` with the name of the Virtual Box instance (ie: `apollo-ruby`). Once done, the box will be packaged in the same directory that you are currently in.
+
+### Components
+
+Each box is configured with specific components needed for development:
+
+#### apolloblack/ruby:
+
+* Apache 2
+* Java 8
+* Ruby 2.4.1
+* Phusion Passenger
+* PostgreSQL 9.6
+* PostGIS 2.3
+* Redis (Latest Stable)
+* Neo4j
+
+#### apolloblack/go:
+
+* Apache 2
+* Java 8
+* Go 1.9
+* PostgreSQL 9.6
+* PostGIS 2.3
+* Redis (Latest Stable)
+* Neo4j
+
+#### apolloblack/java:
+
+* Apache 2
+* Java 8
+* PostgreSQL 9.6
+* PostGIS 2.3
+* Redis (Latest Stable)
+* Neo4j
 
 ## Links
 
