@@ -3,11 +3,10 @@ PASSWD="$(date +%s | sha256sum | base64 | head -c 32 ; echo)"
 echo "# -------------------------------- #"
 echo "#      Apollo Ruby VM Install      #"
 echo "# -------------------------------- #"
-echo "# + Ruby 2.4.1                     #"
+echo "# + Golang 1.9                     #"
 echo "# + PostgreSQL 9.6                 #"
 echo "# + PostGIS 2.3                    #"
 echo "# + Redis Latest                   #"
-echo "# + Phusion Passenger 5            #"
 echo "# + Java 8                         #"
 echo "# + Neo4j                          #"
 echo "# -------------------------------- #"
@@ -16,20 +15,20 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 echo "# -------------------------------- #"
-echo "#          Installing Ruby         #"
+echo "#        Installing Golang         #"
 echo "# -------------------------------- #"
 
 sudo apt-get -y install gcc make python-software-properties git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip  libmagick++-dev libv8-dev libffi-dev libpulse0
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+
 mkdir ~/downloads
-cd ~/downloads && wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz -O ruby.tar.gz
-cd ~/downloads && tar xzf ruby.tar.gz
-cd ~/downloads/ruby-2.4.1 && ./configure -prefix=$HOME
-cd ~/downloads/ruby-2.4.1 && make
-cd ~/downloads/ruby-2.4.1 && make install
-gem install bundler
-RUBY_PATH="$(which ruby)"
-GEM_PATH="$(which gem)"
+cd ~/downloads && curl -O https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
+cd ~/downloads && tar xvf go1.9.linux-amd64.tar.gz
+sudo chown -R root:root ./go
+sudo mv go /usr/local
+echo 'export GOPATH=$HOME/work' | sudo tee --append ~/.profile > /dev/null
+echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' | sudo tee --append ~/.profile > /dev/null
+source ~/.profile
+mkdir $HOME/work
 
 echo "# -------------------------------- #"
 echo "#         Installing Redis         #"
@@ -71,24 +70,6 @@ echo "#         Installing Apache2       #"
 echo "# -------------------------------- #"
 
 sudo apt-get -y install apache2
-
-echo "# -------------------------------- #"
-echo "#   Installing Phusion Passenger   #"
-echo "# -------------------------------- #"
-
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
-echo 'deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main' | sudo tee --append /etc/apt/sources.list.d/passenger.list > /dev/null
-sudo chown root: /etc/apt/sources.list.d/passenger.list
-sudo chmod 600 /etc/apt/sources.list.d/passenger.list
-sudo apt-get update -y
-sudo apt-get -y install libapache2-mod-passenger
-sudo a2enmod passenger
-sudo service apache2 restart
-sudo rm /usr/bin/ruby
-sudo ln -s "${RUBY_PATH}" /usr/bin/ruby
-sudo rm /usr/bin/gem
-sudo ln -s "${GEM_PATH}" /usr/bin/gem
-sudo service apache2 restart
 
 echo "# -------------------------------- #"
 echo "#        Installing Java 8         #"
