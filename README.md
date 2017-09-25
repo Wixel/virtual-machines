@@ -5,7 +5,6 @@ This project contains all the configuration and set up instructions to compile o
 ## Table of contents
 
 - [Environment](#environments)
-  - [Dependencies](#dependencies)
   - [Vagrant Boxes](#vagrant-boxes)
 - [Building Base Boxes](#building-base-boxes)
     - [Creating Ubuntu Image](#creating-ubuntu-image)
