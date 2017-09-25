@@ -108,7 +108,7 @@ mkdir -p /home/vagrant/.ssh
 chmod 0700 /home/vagrant/.ssh
 wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
 chmod 0600 /home/vagrant/.ssh/authorized_keys
-chown -R vagrant /home/vagrant/.ssh
+sudo chown -R vagrant:root /home/vagrant/.ssh
 ```
 
 Enable the local SSH Server:
@@ -118,6 +118,17 @@ sudo apt-get install -y openssh-server
 sudo nano /etc/ssh/sshd_config
 # Uncomment AuthorizedKeysFile %h/.ssh/authorized_keys
 sudo service ssh restart
+```
+
+Install VirtualBox Guest Additions:
+
+```shell
+sudo apt-get install virtualbox-guest-additions-iso
+sudo mkdir /media/iso
+sudo mount /usr/share/virtualbox/VBoxGuestAdditions.iso /media/iso
+cd /media/iso
+sudo ./VBoxLinuxAdditions.run
+sudo reboot
 ```
 
 Lastly, run the installer script for the kind of server this should be (this can take a while):
