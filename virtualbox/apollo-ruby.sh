@@ -108,6 +108,12 @@ sudo service neo4j stop
 sudo service neo4j start
 
 echo "# -------------------------------- #"
+echo "#      Installing JS Runtime       #"
+echo "# -------------------------------- #"
+
+sudo apt-get install -y nodejs
+
+echo "# -------------------------------- #"
 echo "#          Setting ENV Vars        #"
 echo "# -------------------------------- #"
 
