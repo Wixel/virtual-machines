@@ -111,9 +111,9 @@ echo "# -------------------------------- #"
 echo "#          Setting ENV Vars        #"
 echo "# -------------------------------- #"
 
-echo 'RAILS_ENV="production"' | sudo tee --append /etc/environment > /dev/null
+echo 'RAILS_ENV="development"' | sudo tee --append /etc/environment > /dev/null
 echo 'DATABASE_URL="postgresql://app_user:password@127.0.0.1:5432/app_db"' | sudo tee --append /etc/environment > /dev/null
-echo 'REDIS_URL="redis://localhost:637"' | sudo tee --append /etc/environment > /dev/null
+echo 'REDIS_URL="redis://localhost:6379"' | sudo tee --append /etc/environment > /dev/null
 
 echo "# -------------------------------- #"
 echo "#            Cleaning Up           #"

@@ -12,6 +12,8 @@ This project contains all the configuration and set up instructions to compile o
     - [Provisioning Base Box](#provisioning-base-box)
     - [Packaging](#packaging)
 - [Components](#components)    
+- [Accounts](#accounts)    
+- [Global Variables](#global-variables)    
 - [License](#license)
 - [Links](#links)
 
@@ -142,7 +144,6 @@ rm ~/setup.sh
 sudo dd if=/dev/zero of=/EMPTY bs=1M
 sudo rm -f /EMPTY
 cat /dev/null > ~/.bash_history && history -c && exit
-sudo shutdown -h now
 ```
 
 Head back to your host machine terminal and run the following:
@@ -186,6 +187,34 @@ Each box is configured with specific components needed for development:
 * PostGIS 2.3
 * Redis (Latest Stable)
 * Neo4j
+
+### Accounts
+
+We aim to use standard user account credentials throughout the instances of the virtual machines, please follow the same guideline:
+
+*Operating System Users:*
+
+Username: root
+Password: vagrant
+
+Username: vagrant
+Password: vagrant
+
+*Database User:*
+
+Username: app_user
+Password: password
+Database: app_db
+
+### Global Variables
+
+As part of the installation process, we create global environment variables that would be expected on a production server. This is simply to keep configuration simple between dev and production.
+
+Variables injected into `/etc/environment` are:
+
+* `DATABASE_URL` The url pointing to the local database
+* `RAILS_ENV` The Rails environment setting (default to `development`)
+* `REDIS_URL` The url for Redis
 
 ## Links
 
