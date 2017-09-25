@@ -85,25 +85,25 @@ It's important to ensure that you download and add the default Vagrant insecure 
 
 Ensure that the vagrant user can use `sudo` without a password:
 
-```
+```shell
 sudo nano /etc/sudoers.d/vagrant
 ```
 
 Add the following to the file:
 
-```
+```shell
 vagrant ALL=(ALL) NOPASSWD:ALL
 ```
 
 Change the root password to `vagrant`:
 
-```
+```shell
 sudo passwd root
 ```
 
 Download vagrant key:
 
-```
+```shell
 mkdir -p /home/vagrant/.ssh
 chmod 0700 /home/vagrant/.ssh
 wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
@@ -113,7 +113,7 @@ chown -R vagrant /home/vagrant/.ssh
 
 Enable the local SSH Server:
 
-```
+```shell
 sudo apt-get install -y openssh-server
 sudo nano /etc/ssh/sshd_config
 # Uncomment AuthorizedKeysFile %h/.ssh/authorized_keys
@@ -124,7 +124,7 @@ Lastly, run the installer script for the kind of server this should be (this can
 
 Example to install the Rails server:
 
-```
+```shell
 cd ~ && wget https://raw.githubusercontent.com/apollo-black/virtual-machines/master/virtualbox/apollo-ruby.sh -O setup.sh
 chmod a+x setup.sh
 ./setup.sh
@@ -138,7 +138,7 @@ Once the above process has completed, it's time to cleanup and package the box.
 
 First, while still logged in, let's clean the box up:
 
-```
+```shell
 rm ~/setup.sh
 sudo dd if=/dev/zero of=/EMPTY bs=1M
 sudo rm -f /EMPTY
@@ -147,7 +147,7 @@ cat /dev/null > ~/.bash_history && history -c && exit
 
 Head back to your host machine terminal and run the following:
 
-```
+```shell
 vagrant package --base <box name> --output apollo-<BOX NAME>.box
 ```
 
