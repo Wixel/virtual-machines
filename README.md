@@ -202,19 +202,19 @@ Each box is configured with specific components needed for development:
 
 We aim to use standard user account credentials throughout the instances of the virtual machines, please follow the same guideline:
 
-*Operating System Users:*
+**Operating System Users:**
 
-Username: root
-Password: vagrant
+- Username: root
+- Password: vagrant
 
-Username: vagrant
-Password: vagrant
+- Username: vagrant
+- Password: vagrant
 
-*Database User:*
+**Database User:**
 
-Username: app_user
-Password: password
-Database: app_db
+- Username: app_user
+- Password: password
+- Database: app_db
 
 ### Global Variables
 
