@@ -13,8 +13,8 @@ This project contains all the configuration and set up instructions to compile o
 - [Components](#components)    
 - [Accounts](#accounts)    
 - [Global Variables](#global-variables)    
-- [License](#license)
 - [Links](#links)
+- [License](#license)
 
 ## Environment
 
