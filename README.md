@@ -178,6 +178,7 @@ Each box is configured with specific components needed for development:
 * PostGIS 2.3
 * Redis (Latest Stable)
 * Neo4j
+* phpPgAdmin
 
 #### apolloblack/go:
 
@@ -188,6 +189,8 @@ Each box is configured with specific components needed for development:
 * PostGIS 2.3
 * Redis (Latest Stable)
 * Neo4j
+* Ruby 2.4.1 (Primarily for Rails migrations that make Go a bit easier)
+* phpPgAdmin
 
 #### apolloblack/java:
 
@@ -197,6 +200,7 @@ Each box is configured with specific components needed for development:
 * PostGIS 2.3
 * Redis (Latest Stable)
 * Neo4j
+* phpPgAdmin
 
 ### Accounts
 

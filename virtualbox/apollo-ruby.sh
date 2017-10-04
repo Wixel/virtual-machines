@@ -48,7 +48,7 @@ echo "# -------------------------------- #"
 sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt update -y
-sudo apt install -y postgresql-9.6 postgresql-contrib-9.6
+sudo apt install -y postgresql-9.6 postgresql-contrib-9.6 phppgadmin
 
 echo "# -------------------------------- #"
 echo "#         Setting up DB User       #"
@@ -89,6 +89,16 @@ sudo ln -s "${RUBY_PATH}" /usr/bin/ruby
 sudo rm /usr/bin/gem
 sudo ln -s "${GEM_PATH}" /usr/bin/gem
 sudo service apache2 restart
+
+echo "# -------------------------------- #"
+echo "#      Configuring phppgadmin      #"
+echo "# -------------------------------- #"
+
+echo 'Allow From all' | sudo tee --append /etc/apache2/conf-available/phppgadmin.conf > /dev/null
+sudo sed -i -e 's/Require local/# Require local/g' /etc/apache2/conf-available/phppgadmin.conf
+sudo sed -i -e "s/$conf[#'extra_login_security#'] = true;/$conf[#'extra_login_security#'] = false;/g" /etc/phppgadmin/config.inc.php
+sudo systemctl restart postgresql
+sudo systemctl restart apache2
 
 echo "# -------------------------------- #"
 echo "#        Installing Java 8         #"
