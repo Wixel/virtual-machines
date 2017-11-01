@@ -27,6 +27,9 @@ echo 'export GOPATH=$HOME/work' | sudo tee --append ~/.profile > /dev/null
 echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' | sudo tee --append ~/.profile > /dev/null
 source ~/.profile
 mkdir $HOME/work
+mkdir $HOME/work/bin
+mkdir $HOME/work/pkg
+mkdir $HOME/work/src
 
 echo "# -------------------------------- #"
 echo "#         Installing Redis         #"
