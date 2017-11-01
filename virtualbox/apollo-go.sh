@@ -7,8 +7,6 @@ echo "# + Golang 1.9                     #"
 echo "# + PostgreSQL 9.6                 #"
 echo "# + PostGIS 2.3                    #"
 echo "# + Redis Latest                   #"
-echo "# + Java 8                         #"
-echo "# + Neo4j                          #"
 echo "# -------------------------------- #"
 
 sudo apt-get update -y
@@ -63,29 +61,6 @@ sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 sudo apt update -y
 sudo apt install -y postgis postgresql-9.6-postgis-2.3
 sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" app_db
-
-echo "# -------------------------------- #"
-echo "#         Installing Apache2       #"
-echo "# -------------------------------- #"
-
-sudo apt-get -y install apache2
-
-echo "# -------------------------------- #"
-echo "#        Installing Java 8         #"
-echo "# -------------------------------- #"
-
-sudo apt install default-jre default-jre-headless
-
-echo "# -------------------------------- #"
-echo "#        Installing Neo4j          #"
-echo "# -------------------------------- #"
-
-wget --no-check-certificate -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
-echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee /etc/apt/sources.list.d/neo4j.list
-sudo apt update
-sudo apt install neo4j
-sudo service neo4j stop
-sudo service neo4j start
 
 echo "# -------------------------------- #"
 echo "#          Setting ENV Vars        #"
