@@ -18,8 +18,9 @@ echo "# -------------------------------- #"
 echo "#        Installing Golang         #"
 echo "# -------------------------------- #"
 
-cd ~/downloads && curl -O https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
-cd ~/downloads && tar xvf go1.9.linux-amd64.tar.gz
+
+cd ~/downloads && curl -O https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
+cd ~/downloads && tar xvf go1.9.2.linux-amd64.tar.gz
 sudo chown -R root:root ./go
 sudo mv go /usr/local
 echo 'export GOPATH=$HOME/work' | sudo tee --append ~/.profile > /dev/null
