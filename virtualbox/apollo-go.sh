@@ -18,18 +18,16 @@ echo "# -------------------------------- #"
 echo "#        Installing Golang         #"
 echo "# -------------------------------- #"
 
-
-cd ~/downloads && curl -O https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
-cd ~/downloads && tar xvf go1.9.2.linux-amd64.tar.gz
-sudo chown -R root:root ./go
-sudo mv go /usr/local
+sudo add-apt-repository ppa:gophers/archive
+sudo apt update
+sudo apt-get install golang-1.9-go
 echo 'export GOPATH=$HOME/work' | sudo tee --append ~/.profile > /dev/null
 echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' | sudo tee --append ~/.profile > /dev/null
-source ~/.profile
 mkdir $HOME/work
 mkdir $HOME/work/bin
 mkdir $HOME/work/pkg
 mkdir $HOME/work/src
+source ~/.profile
 
 echo "# -------------------------------- #"
 echo "#         Installing Redis         #"
