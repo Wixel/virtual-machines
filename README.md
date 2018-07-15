@@ -208,17 +208,23 @@ We aim to use standard user account credentials throughout the instances of the 
 
 **Operating System Users:**
 
+S```
 - Username: root
 - Password: vagrant
+```
 
+```
 - Username: vagrant
 - Password: vagrant
+```
 
 **Database User:**
 
+```
 - Username: app_user
 - Password: password
 - Database: app_db
+```
 
 ### Global Variables
 
@@ -240,7 +246,7 @@ Variables injected into `/etc/environment` are:
 
 MIT License
 
-Copyright (c) 2018 Wixel Software Solutions Pty (Ltd)
+Copyright (c) 2018 Apollo Black
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
