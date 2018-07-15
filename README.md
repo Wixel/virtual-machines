@@ -208,7 +208,7 @@ We aim to use standard user account credentials throughout the instances of the 
 
 **Operating System Users:**
 
-S```
+```
 - Username: root
 - Password: vagrant
 ```
