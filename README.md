@@ -122,12 +122,16 @@ sudo service ssh restart
 
 Install VirtualBox Guest Additions:
 
+Once the host has booted, click Devices | Insert Guest Additions CD Image.
+
+The type:
+
 ```shell
-sudo apt-get install virtualbox-guest-additions-iso
-sudo mkdir /media/iso
-sudo mount /usr/share/virtualbox/VBoxGuestAdditions.iso /media/iso
-cd /media/iso
-sudo ./VBoxLinuxAdditions.run
+sudo mount /dev/cdrom /media/cdrom
+cd /media/cdrom
+sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
+sudo su
+ ./VBoxLinuxAdditions.run
 sudo reboot
 ```
 
@@ -151,9 +155,9 @@ First, while still logged in, let's clean the box up:
 
 ```shell
 rm ~/setup.sh
+cat /dev/null > ~/.bash_history && history -c && exit
 sudo dd if=/dev/zero of=/EMPTY bs=1M
 sudo rm -f /EMPTY
-cat /dev/null > ~/.bash_history && history -c && exit
 ```
 
 Head back to your host machine terminal and run the following:
@@ -238,8 +242,8 @@ Variables injected into `/etc/environment` are:
 
 ## Links
 
-- [Vagrant 2.0.0](https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.dmg?_ga=2.175497765.666050554.1506000715-1387584540.1505460054)
-- [VirtualBox ^5.1.2.8](http://download.virtualbox.org/virtualbox/5.1.28/VirtualBox-5.1.28-117968-OSX.dmg)
+- [Vagrant](https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.dmg?_ga=2.175497765.666050554.1506000715-1387584540.1505460054)
+- [VirtualBox](http://download.virtualbox.org/virtualbox/5.1.28/VirtualBox-5.1.28-117968-OSX.dmg)
 - [Ubuntu-16.04.3](http://releases.ubuntu.com/16.04/ubuntu-16.04.3-server-amd64.iso.torrent?_ga=2.185470314.2120170685.1506000760-822906382.1505464433)
 
 ## License
